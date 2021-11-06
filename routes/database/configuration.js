@@ -4,7 +4,12 @@ const connectString = process.env.DATABASE_URL;
 
 console.log("connection string", connectString);
 const client = new Client({
-    connectString
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    database: process.env.PGDATABASE,
+    port: process.env.PGPORT,
+    host: process.env.PGHOST,
+    ssl: true
 })
 async function createUser() {
     try {
