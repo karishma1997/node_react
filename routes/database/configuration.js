@@ -1,18 +1,16 @@
 const { Pool, Client } = require('pg')
-const dotenv = require('dotenv').config();
+require("dotenv").config();
 // const connectString = process.env.DATABASE_URL;
 
-// console.log("connection string", connectString);
-const client = new Client({
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    database: process.env.PGDATABASE,
-    port: process.env.PGPORT,
-    host: process.env.PGHOST,
-    ssl: true,
-    idleTimeoutMillis: 0,
-  connectionTimeoutMillis: 0,
-})
+const isProd = process.env.DB_RUNNING === "prod" ? true : false;
+
+const connectionString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`;
+
+const client = new Pool({
+    connectionString: isProd ? process.env.DATABASE_URL : connectionString,
+    ssl: isProd ? { rejectUnauthorized: false } : false
+});
+
 client.connect();
 
 function createUser() {
