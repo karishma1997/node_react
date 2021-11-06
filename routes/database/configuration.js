@@ -16,7 +16,7 @@ client.connect();
 
 function createUser() {
     try {
-        var userTable = "create table if not exists users (id int primary key not null,name text not null, email char(50) not null, phone_number bigint not null, address char(100) not null)";
+        var userTable = "create table if not exists users (id int primary key not null,name text not null, email text not null, phone_number bigint not null, address char(100) not null)";
         client.query(userTable, function (err, result1) {
             if (err) {
                 console.log("create table usererror",err);

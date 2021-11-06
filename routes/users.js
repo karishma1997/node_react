@@ -2,18 +2,19 @@ const {client} = require('./database/configuration')
 
 console.log("client....", client)
 var express = require('express');
-const { password } = require('pg/lib/defaults');
 var router = express.Router();
 //users create
 router.post('/users', function (req, res) {
   id = req.body.id;
   email = req.body.email;
-  password = req.body.password;
-  phone_number = req.body.password;
+  // password = req.body.password;
+  phone_number = req.body.phone_number;
   address = req.body.address;
-  var query = "Insert into users (id, email, password,phone_number,address) values (?,?,?,?,?)";
-  client.query(query, [id, email, password, phone_number, address], function (err, result) {
+  var query = `Insert into users (id,email,phone_number,address) values (${id},${email},${phone_number},${address})`;
+  console.log("qqqqqq" ,query);
+  client.query(query, function (err, result) {
     if (err) {
+      console.log("helllllllll" ,err);
       res.send(err);
     }
     else {
@@ -30,7 +31,7 @@ router.get('/users', function (req, res) {
       res.send(err);
     }
     else {
-      res.send(result);
+      res.send(result.rows);
     }
   })
 })
