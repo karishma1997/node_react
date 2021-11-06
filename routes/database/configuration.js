@@ -9,9 +9,9 @@ const client = new Client({
     database: process.env.PGDATABASE,
     port: process.env.PGPORT,
     host: process.env.PGHOST,
-    ssl: true,
-    idleTimeoutMillis: 0,
-  connectionTimeoutMillis: 0,
+//     ssl: true,
+//     idleTimeoutMillis: 0,
+//   connectionTimeoutMillis: 0,
 })
 client.connect();
 
