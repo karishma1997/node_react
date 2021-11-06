@@ -1,4 +1,6 @@
-const client = require('./database/configuration')
+const {client} = require('./database/configuration')
+
+console.log("client....", client)
 var express = require('express');
 const { password } = require('pg/lib/defaults');
 var router = express.Router();
@@ -23,6 +25,7 @@ router.post('/users', function (req, res) {
 router.get('/users', function (req, res) {
   var query = "Select * from users";
   client.query(query, function (err, result) {
+    console.log("result.....", result);
     if (err) {
       res.send(err);
     }

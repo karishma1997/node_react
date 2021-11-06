@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const isProd = process.env.DB_RUNNING === "prod" ? true : false;
 
+console.log("isProd....", isProd);
 const connectionString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`;
 
 const client = new Pool({
